@@ -9,7 +9,6 @@ A retro gaming portfolio made using HTML, CSS & JavaScript 😭🔥
 - 💀 Funny enemy interactions
 - 🏆 XP leveling
 - 🎵 Game sounds
-- 👾 Secret hidden zone
 - 🚀 Cinematic ending
 
 ## ⚡ Tech Used
