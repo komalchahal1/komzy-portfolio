@@ -392,20 +392,63 @@ if (
         const input = document.querySelector(".portal-box input");
 
         if(input){
-
             input.focus();
-
         }
-
     }, 200);
 }
+    }
+    requestAnimationFrame(gameLoop);
+}
+
+/* FLAG WIN */
+
+const flag = document.getElementById('flag');
+const flagPosition = flag.offsetLeft;
+
+if (
+    x >= flagPosition - 100 &&
+    !gameCompleted
+) {
+
+    /* PLAYER DOES NOT HAVE ENOUGH COINS */
+
+    if(score < 5){
+        gameCompleted = true;
+        moveLeft = false;
+        moveRight = false;
+        bgMusic.pause();
+        const redPortal = document.getElementById("treasurePortal");
+        redPortal.style.display = "flex";
 
     }
 
-    requestAnimationFrame(gameLoop);
+    /* PLAYER COMPLETED GAME */
 
+    else{
+
+        gameCompleted = true;
+        moveLeft = false;
+        moveRight = false;
+        document.body.style.transition = "all 1s";
+        document.body.style.filter = "brightness(1.2)";
+        const portal = document.getElementById("endingScreen");
+        portal.style.display = "flex";
+        portal.style.opacity = "1";
+        portal.style.pointerEvents = "all";
+        bgMusic.pause();
+        winSound.currentTime = 0;
+        winSound.play();
+
+        setTimeout(() => {
+
+            const input = document.querySelector(".portal-box input");
+
+            if(input){
+                input.focus();
+            }
+        }, 200);
+    }
 }
-
 
 gameLoop();
 
