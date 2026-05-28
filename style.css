@@ -853,6 +853,80 @@ body{
     }
 }
 
+/* RED LOCK PORTAL */
+
+#treasurePortal{
+
+    position:fixed;
+    inset:0;
+    background:#d00000;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:999999;
+    font-family:'Press Start 2P', cursive;
+    animation:redGlitch .08s infinite alternate;
+
+}
+
+#treasurePortal h1{
+
+    color:#ff4d4d;
+    font-size:40px;
+    margin-bottom:40px;
+    text-shadow:
+    0 0 10px red,
+    0 0 25px red,
+    0 0 50px #ff0000;
+
+}
+
+#treasurePortal p{
+
+    color:white;
+    font-size:12px;
+    text-align:center;
+    line-height:2.3;
+    max-width:700px;
+
+}
+
+#portalBtn{
+
+    margin-top:40px;
+    padding:18px 40px;
+    border:none;
+    background:white;
+    color:red;
+    font-family:'Press Start 2P', cursive;
+    cursor:pointer;
+    transition:.3s;
+
+}
+
+#portalBtn:hover{
+
+    transform:scale(1.08);
+    box-shadow:
+    0 0 20px white;
+
+}
+
+/* GLITCH */
+
+@keyframes redGlitch{
+
+    from{
+        filter:brightness(1);
+    }
+
+    to{
+        filter:brightness(1.15);
+    }
+
+}
+
 /* ENDING SCREEN */
 
 #endingScreen{
