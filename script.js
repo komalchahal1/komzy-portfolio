@@ -334,15 +334,10 @@ function gameLoop() {
                 x < ex + 60 &&
                 y > -50
             ) {
-
             gameCompleted = true;
-
         let randomEnemy = enemyNames[Math.floor(Math.random() * enemyNames.length)];
-
         screenShake();
-
         alert('💀 CAUGHT BY ' + randomEnemy);
-
          setTimeout(() => {
             location.reload();
         }, 600);
@@ -356,66 +351,50 @@ function gameLoop() {
 const flag = document.getElementById('flag');
 const flagPosition = flag.offsetLeft;
 
-      /* PLAYER DOES NOT HAVE ENOUGH COINS */
+if (
+    x >= flagPosition - 100 &&
+    !gameCompleted
+) {
 
- if(score < 5){
+    /* PLAYER DOES NOT HAVE ENOUGH COINS */
+
+    if(score < 5){
 
         gameCompleted = true;
-
         moveLeft = false;
         moveRight = false;
-
         bgMusic.pause();
-
         const redPortal = document.getElementById("treasurePortal");
-
         redPortal.style.display = "flex";
 
     }
 
+    /* PLAYER COMPLETED GAME */
 
-if (
-    x >= flagPosition - 100 &&
-    score >= 5 &&
-    !gameCompleted
-) {
+    else{
+        gameCompleted = true;
+        moveLeft = false;
+        moveRight = false;
+        document.body.style.transition = "all 1s";
+        document.body.style.filter = "brightness(1.2)";
+        const portal = document.getElementById("endingScreen");
+        portal.style.display = "flex";
+        portal.style.opacity = "1";
+        portal.style.pointerEvents = "all";
+        bgMusic.pause();
+        winSound.currentTime = 0;
+        winSound.play();
 
-    gameCompleted = true;
+        setTimeout(() => {
 
-    moveLeft = false;
-    moveRight = false;
+            const input = document.querySelector(".portal-box input");
 
-    /* STOP GAME FEEL */
+            if(input){
 
-    document.body.style.transition = "all 1s";
-    document.body.style.filter = "brightness(1.2)";
-    
-    /* SHOW PORTAL */
-
-    const portal = document.getElementById("endingScreen");
-    portal.style.display = "flex";
-    portal.style.opacity = "1";
-    portal.style.pointerEvents = "all";
-
-    /* MUSIC */
-
-    bgMusic.pause();
-    winSound.currentTime = 0;
-    winSound.play();
-
-    /* AUTO FOCUS INPUT */
-
-    setTimeout(() => {
-
-        const input = document.querySelector(".portal-box input");
-
-        if(input){
-            input.focus();
-        }
-    }, 200);
-}
+                input.focus();
+            }
+        }, 200);
     }
-    requestAnimationFrame(gameLoop);
 }
 
 gameLoop();
