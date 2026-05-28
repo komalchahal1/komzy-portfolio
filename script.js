@@ -346,10 +346,12 @@ function gameLoop() {
 
         });
         
-/* FLAG WIN */
+/* FLAG SYSTEM */
 
 const flag = document.getElementById('flag');
 const flagPosition = flag.offsetLeft;
+
+/* WIN PORTAL */
 
 if (
     x >= flagPosition - 100 &&
@@ -362,14 +364,16 @@ if (
     moveLeft = false;
     moveRight = false;
 
-    /* STOP GAME FEEL */
+    /* CINEMATIC EFFECT */
 
     document.body.style.transition = "all 1s";
     document.body.style.filter = "brightness(1.2)";
-    
-    /* SHOW PORTAL */
 
-    const portal = document.getElementById("endingScreen");
+    /* SHOW WIN PORTAL */
+
+    const portal =
+        document.getElementById("endingScreen");
+
     portal.style.display = "flex";
     portal.style.opacity = "1";
     portal.style.pointerEvents = "all";
@@ -377,14 +381,16 @@ if (
     /* MUSIC */
 
     bgMusic.pause();
+
     winSound.currentTime = 0;
     winSound.play();
 
-    /* AUTO FOCUS INPUT */
+    /* AUTO FOCUS */
 
     setTimeout(() => {
 
-        const input = document.querySelector(".portal-box input");
+        const input =
+        document.querySelector(".portal-box input");
 
         if(input){
 
@@ -393,11 +399,53 @@ if (
         }
 
     }, 200);
+
 }
 
-    }
+/* FAILED PORTAL */
 
-    requestAnimationFrame(gameLoop);
+else if (
+
+    x >= flagPosition - 100 &&
+    score < 5 &&
+    !gameCompleted
+
+) {
+
+    gameCompleted = true;
+
+    moveLeft = false;
+    moveRight = false;
+
+    /* FAILED EFFECT */
+
+    document.body.style.transition = "all 0.5s";
+    document.body.style.filter =
+    "brightness(0.5) hue-rotate(-20deg)";
+
+    /* STOP MUSIC */
+
+    bgMusic.pause();
+
+    /* CALCULATE MISSED COINS */
+
+    let missedCoins = 5 - score;
+
+    document.getElementById("missedCoins")
+    .innerText = missedCoins;
+
+    /* SHOW FAILED PORTAL */
+
+    const failedPortal =
+    document.getElementById("failedPortal");
+
+    failedPortal.style.display = "flex";
+
+}
+
+      function retryMission(){
+
+    location.reload();
 
 }
 
