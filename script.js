@@ -397,6 +397,11 @@ if (
     }
 }
 
-gameLoop();
+}
 
-
+// START THE GAME LOOP - RUNS CONTINUOUSLY AT 60 FPS
+function animationLoop() {
+    gameLoop();
+    requestAnimationFrame(animationLoop);
+}
+animationLoop();
