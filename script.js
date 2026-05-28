@@ -334,10 +334,15 @@ function gameLoop() {
                 x < ex + 60 &&
                 y > -50
             ) {
+
             gameCompleted = true;
+
         let randomEnemy = enemyNames[Math.floor(Math.random() * enemyNames.length)];
+
         screenShake();
+
         alert('💀 CAUGHT BY ' + randomEnemy);
+
          setTimeout(() => {
             location.reload();
         }, 600);
@@ -346,12 +351,10 @@ function gameLoop() {
 
         });
         
-/* FLAG SYSTEM */
+/* FLAG WIN */
 
 const flag = document.getElementById('flag');
 const flagPosition = flag.offsetLeft;
-
-/* WIN PORTAL */
 
 if (
     x >= flagPosition - 100 &&
@@ -364,16 +367,14 @@ if (
     moveLeft = false;
     moveRight = false;
 
-    /* CINEMATIC EFFECT */
+    /* STOP GAME FEEL */
 
     document.body.style.transition = "all 1s";
     document.body.style.filter = "brightness(1.2)";
+    
+    /* SHOW PORTAL */
 
-    /* SHOW WIN PORTAL */
-
-    const portal =
-        document.getElementById("endingScreen");
-
+    const portal = document.getElementById("endingScreen");
     portal.style.display = "flex";
     portal.style.opacity = "1";
     portal.style.pointerEvents = "all";
@@ -381,16 +382,14 @@ if (
     /* MUSIC */
 
     bgMusic.pause();
-
     winSound.currentTime = 0;
     winSound.play();
 
-    /* AUTO FOCUS */
+    /* AUTO FOCUS INPUT */
 
     setTimeout(() => {
 
-        const input =
-        document.querySelector(".portal-box input");
+        const input = document.querySelector(".portal-box input");
 
         if(input){
 
@@ -399,53 +398,11 @@ if (
         }
 
     }, 200);
-
 }
 
-/* FAILED PORTAL */
+    }
 
-else if (
-
-    x >= flagPosition - 100 &&
-    score < 5 &&
-    !gameCompleted
-
-) {
-
-    gameCompleted = true;
-
-    moveLeft = false;
-    moveRight = false;
-
-    /* FAILED EFFECT */
-
-    document.body.style.transition = "all 0.5s";
-    document.body.style.filter =
-    "brightness(0.5) hue-rotate(-20deg)";
-
-    /* STOP MUSIC */
-
-    bgMusic.pause();
-
-    /* CALCULATE MISSED COINS */
-
-    let missedCoins = 5 - score;
-
-    document.getElementById("missedCoins")
-    .innerText = missedCoins;
-
-    /* SHOW FAILED PORTAL */
-
-    const failedPortal =
-    document.getElementById("failedPortal");
-
-    failedPortal.style.display = "flex";
-
-}
-
-      function retryMission(){
-
-    location.reload();
+    requestAnimationFrame(gameLoop);
 
 }
 
